@@ -1,9 +1,9 @@
 import { sequelize } from '../../db';
 import { DataTypes, Model } from 'sequelize';
 import { ModelAsistenciaT } from './';
-export class AsistenciaModel extends Model<any, ModelAsistenciaT> {}
+export class ModelAsistencia extends Model<any, ModelAsistenciaT> {}
 
-AsistenciaModel.init(
+ModelAsistencia.init(
 	{
 		id_asistencia: {
 			type: DataTypes.BIGINT,
