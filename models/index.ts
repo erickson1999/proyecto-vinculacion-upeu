@@ -1,2 +1,1 @@
-export * from './categorias';
-export * from "./users"
+export * from './ModelAsistencia';
