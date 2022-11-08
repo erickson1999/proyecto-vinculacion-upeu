@@ -15,11 +15,11 @@ const handler = async (
 	}
 
 	const { method } = req;
-	const metodosPermitidos = ['GET'];
+	const availableMethods = ['GET'];
 	if (!method) {
-		return res.status(400).json({ message: 'Enviar un método válido' });
+		return res.status(400).json({ message: 'Es necesario enviar un método' });
 	}
-	if (!metodosPermitidos.includes(method)) {
+	if (!availableMethods.includes(method)) {
 		return res.status(400).json({
 			message: `El método ${method} no está habilitado para este recurso`,
 		});
@@ -29,7 +29,7 @@ const handler = async (
 		return res.status(200).json({ message: 'Conexion exitosa' });
 	} catch (error: any) {
 		console.error(error);
-        //ya conecta la db de paxi
+		//ya conecta la db de paxi
 		return res.status(200).json({
 			message: 'Error de conexión a la database',
 			error: error.message,

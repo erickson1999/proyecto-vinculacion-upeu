@@ -1,12 +1,15 @@
 import bcrypt from 'bcrypt';
 
-const encrypt = (pass: string, rounds = 10) => {
-	return bcrypt.hash(pass, rounds, function (err, hash): string {
-		if (err) {
-			console.error('🚀 ~ file: bcrypt.ts ~ line 6 ~ err', err);
-			throw new Error('Ocurrio un error al generar el hash');
-		}
-		return hash;
+const encrypt = async (password: string, rounds = 10) => {
+	return new Promise(async (resolve, reject) => {
+		return bcrypt
+			.hash(password, rounds)
+			.then((value: string) => {
+				resolve(value);
+			})
+			.catch((err) => {
+				reject(err);
+			});
 	});
 };
 

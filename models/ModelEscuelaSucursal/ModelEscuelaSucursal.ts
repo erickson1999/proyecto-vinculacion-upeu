@@ -1,10 +1,10 @@
 import { sequelize } from '../../db';
 import { Model, DataTypes } from 'sequelize';
-import { ModelEscuela_sucursalT } from '.';
+import { ModelEscuelaSucursalT } from '.';
 
-export class ModelEscuela_sucursal extends Model<any, ModelEscuela_sucursalT> {}
+export class ModelEscuelaSucursal extends Model<any, ModelEscuelaSucursalT> {}
 
-ModelEscuela_sucursal.init(
+ModelEscuelaSucursal.init(
 	{
 		id_escuela_sucursa: {
 			type: DataTypes.BIGINT,

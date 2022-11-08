@@ -1,5 +1,5 @@
 export type ModelUsuarioT = {
-	id_usuario?: number;
+	id_persona?: number;
 	usuario: string;
 	password: string;
 };

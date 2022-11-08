@@ -1,8 +1,9 @@
 import { sequelize } from '../../db';
 import { DataTypes, Model } from 'sequelize';
 import { ModelPersonaT } from '.';
+import { ModelUsuario } from '../ModelUsuario';
 
-class ModelPersona extends Model<any, ModelPersonaT> {}
+export class ModelPersona extends Model<any, ModelPersonaT> {}
 
 ModelPersona.init(
 	{
@@ -10,10 +11,11 @@ ModelPersona.init(
 			type: DataTypes.BIGINT,
 			primaryKey: true,
 			autoIncrement: true,
+			allowNull: false,
 		},
-		nombre: { type: DataTypes.CHAR(100) },
-		appaterno: { type: DataTypes.CHAR(100) },
-		apmaterno: { type: DataTypes.CHAR(100) },
+		nombre: { type: DataTypes.CHAR(50) },
+		appaterno: { type: DataTypes.CHAR(50) },
+		apmaterno: { type: DataTypes.CHAR(50) },
 		dni: { type: DataTypes.NUMBER({ length: 10 }) },
 		direccion: { type: DataTypes.CHAR(200) },
 		correo: {
@@ -21,7 +23,7 @@ ModelPersona.init(
 			validate: { isEmail: { msg: 'El correo ingresado no es valido' } },
 		},
 		numero: {
-			type: DataTypes.NUMBER({ length: 15 }),
+			type: DataTypes.NUMBER({ length: 10 }),
 			validate: { isNumeric: { msg: 'El numero ingresado no es valido' } },
 		},
 		fecha_registro: {
@@ -30,8 +32,16 @@ ModelPersona.init(
 				isDate: { msg: 'La fecha ingresada no valido', args: true },
 			},
 		},
-		usuario: { type: DataTypes.CHAR(200) },
-		password: { type: DataTypes.CHAR(200) },
 	},
-	{ sequelize, modelName: 'persona' }
+	{ sequelize, modelName: 'persona', timestamps: false }
 );
+
+ModelPersona.hasOne(ModelUsuario, {
+	foreignKey: 'id_persona',
+	sourceKey: 'id_persona',
+});
+
+ModelUsuario.belongsTo(ModelPersona, {
+	foreignKey: 'id_persona',
+	targetKey: 'id_persona',
+});

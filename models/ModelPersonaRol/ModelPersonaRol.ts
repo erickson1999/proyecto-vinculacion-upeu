@@ -1,10 +1,10 @@
 import { sequelize } from '../../db';
 import { Model, DataTypes } from 'sequelize';
-import { ModelPersona_rolT } from '.';
+import { ModelPersonaRolT } from '.';
 
-export class ModelPersona_rol extends Model<any, ModelPersona_rolT> {}
+export class ModelPersonaRol extends Model<any, ModelPersonaRolT> {}
 
-ModelPersona_rol.init(
+ModelPersonaRol.init(
 	{
 		id_persona_rol: {
 			type: DataTypes.BIGINT,
@@ -12,9 +12,9 @@ ModelPersona_rol.init(
 			autoIncrement: true,
 			allowNull: false,
 		},
-		id_persona: { type: DataTypes.BIGINT},
-	    id_rol: { type: DataTypes.BIGINT },
-	    estado: { type: DataTypes.CHAR  },
+		id_persona: { type: DataTypes.BIGINT },
+		id_rol: { type: DataTypes.BIGINT },
+		estado: { type: DataTypes.CHAR },
 	},
 	{ sequelize, modelName: 'persona_rol' }
 );

@@ -1,27 +1,30 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
 import bcrypt from 'bcrypt';
-
+import jwt from 'jsonwebtoken';
 type ResponseApi = {
-	result: string;
+	result: any;
 };
 
 const handler = async (
 	req: NextApiRequest,
 	res: NextApiResponse<ResponseApi>
 ) => {
-	const saltRounds = 10;
+	const { body } = req;
+	const verifyToken = jwt.verify(body.token, process.env.TOKEN_SECRET!);
 
-	const pass: string = 'micontra';
+	// const saltRounds = 10;
 
-	bcrypt.genSalt(saltRounds, (err, salt) => {
-		bcrypt.hash(pass, salt, (err, hash) => {
-			bcrypt.compare("micontra", hash, (err, result) => {
-				console.log({ result });
-			});
-		});
-	});
+	// const pass: string = 'micontra';
 
-	res.status(200).json({ result: '' });
+	// bcrypt.genSalt(saltRounds, (err, salt) => {
+	// 	bcrypt.hash(pass, salt, (err, hash) => {
+	// 		bcrypt.compare("micontra", hash, (err, result) => {
+	// 			console.log({ result });
+	// 		});
+	// 	});
+	// });
+
+	res.status(200).json({ result: verifyToken });
 };
 export default handler;

@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { sequelize } from '../../../../db';
-import '../../../../models/categorias';
+// import '../../../../models/categorias';
 type InitsResponseT =
 	| {
 			message: string;
@@ -12,15 +12,16 @@ const handler = async (
 	res: NextApiResponse<InitsResponseT>
 ) => {
 	if (process.env.NODE_ENV !== 'development') {
-		return res.status(404).redirect('/_404');
+		return res
+			.status(400)
+			.json({ message: 'Este end-point es válido solo en desarrollo' });
 	}
-
 	const { method } = req;
-	const metodosPermitidos = ['GET'];
+	const availableMethods = ['GET'];
 	if (!method) {
-		return res.status(400).json({ message: 'Enviar un método válido' });
+		return res.status(400).json({ message: 'Es necesario enviar un método' });
 	}
-	if (!metodosPermitidos.includes(method)) {
+	if (!availableMethods.includes(method!)) {
 		return res.status(400).json({
 			message: `El método ${method} no está habilitado para este recurso`,
 		});

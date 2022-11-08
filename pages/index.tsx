@@ -12,7 +12,7 @@ export default function Home() {
         <h1 className='bg-primary'>hellow mundo</h1>
       </main>
       <footer >
-
+        Footer
       </footer>
     </div>
   )

@@ -30,5 +30,9 @@ export const sequelize = new Sequelize(
 				rejectUnauthorized: false,
 			},
 		},
+		define: {
+			freezeTableName: true,
+			timestamps: false,
+		},
 	}
 );

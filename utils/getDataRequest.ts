@@ -1,5 +1,5 @@
 import { NextApiRequest } from 'next';
-import Error from './Error';
+import Error from './ErrorObj';
 
 type RequestMethodsT = 'GET' | 'POST' | 'PUT' | 'DELETE';
 

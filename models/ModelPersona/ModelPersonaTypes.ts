@@ -1,5 +1,5 @@
 export type ModelPersonaT = {
-	id_persona: number;
+	id_persona?: number;
 	nombre: string;
 	appaterno: string;
 	apmaterno: string;
@@ -8,6 +8,4 @@ export type ModelPersonaT = {
 	correo: string;
 	numero: number;
 	fecha_registro: Date;
-	usuario?: string;
-	password?: string;
 };
