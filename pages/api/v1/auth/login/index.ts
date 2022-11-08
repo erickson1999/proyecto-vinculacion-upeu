@@ -3,6 +3,7 @@ import { ErrorObj } from '../../../../../utils';
 import { validateMethods } from '../../../../../utils/validations';
 import { validateBody } from '../../../../../utils/validations/validateBody';
 import { controllerAuthLogin } from '../../../../../controllers';
+import { ModelPersonaT, ModelUsuarioT } from '../../../../../models';
 type ResponseApi = {
 	ok: boolean;
 	message: string;
@@ -16,13 +17,13 @@ const handler = async (
 	const availableMethods = ['POST'];
 	const bodyAttributes = ['usuario', 'password'];
 	try {
+		//validations
 		validateMethods(method, availableMethods);
-		validateBody(body, bodyAttributes);
+		const bodyJSON = validateBody(body, bodyAttributes);
+		return await controllerAuthLogin(res, bodyJSON);
 	} catch (error) {
 		const { status, msgError } = ErrorObj.get(error);
 		return res.status(status).json({ ok: false, message: msgError });
 	}
-
-	return controllerAuthLogin(res, body);
 };
 export default handler;

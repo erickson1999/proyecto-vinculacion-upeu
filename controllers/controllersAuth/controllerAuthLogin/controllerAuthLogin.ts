@@ -26,12 +26,15 @@ export const controllerAuthLogin = async (
 		const user = await ModelUsuario.findAll({
 			where: { usuario: body.usuario },
 		});
+
 		if (user.length === 0) {
 			return res
 				.status(404)
 				.json({ ok: false, message: 'el usuario no existe' });
 		}
+
 		const userJSON: ModelUsuarioT = user[0].toJSON();
+		
 		const match = await bcrypt.compare(body.password, userJSON.password);
 
 		if (!match) {

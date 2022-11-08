@@ -3,8 +3,6 @@ import { controllerAuthRegister } from '../../../../../controllers';
 import { validateMethods } from '../../../../../utils/validations';
 import { ErrorObj } from '../../../../../utils';
 import { validateBody } from '../../../../../utils/validations/validateBody';
-import { ModelPersonaT } from '../../../../../models';
-//
 
 type ResponseApi = {
 	ok: boolean;
@@ -31,14 +29,15 @@ const handler = async (
 	];
 	try {
 		validateMethods(method, availableMethods);
-		validateBody(body, bodyAttributes);
+
+		const bodyJSON = validateBody(body, bodyAttributes);
+
+		return await controllerAuthRegister(res, bodyJSON);
 	} catch (error) {
 		const { status, msgError } = ErrorObj.get(error);
 		return res.status(status).json({ ok: false, message: msgError });
 	}
 
 	//verificar si los datos son correctos
-
-	return await controllerAuthRegister(res, body);
 };
 export default handler;
